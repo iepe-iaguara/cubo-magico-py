@@ -1,0 +1,1 @@
+# cubo-magico-py
