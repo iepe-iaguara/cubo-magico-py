@@ -17,6 +17,7 @@ Para fazer movimentos você precisa digitar o movimento desejado em letra da not
 * Combine "w" caso queira fazer os movimentos "wide" (Use antes de pressionar o número).
 * Após pressionar as letras desejadas (não é preciso manter as teclas selecionadas, ficam armazenadas),
 use "0" para fazer o movimento da face em sentido horário, "1" para sentido anti-horário e "2" para o movimento duplo.
-* Há também a possibilidade de desfazer os movimentos feitos tlecando "V" (de Voltar),
-e também tem "A" (de Avançar) caso tenha voltado sem querer.
+* Há também a possibilidade de desfazer os movimentos feitos tlecando a seta da esquerda (←),
+e também a seta da direita (→) caso tenha voltado sem querer.
+* Caso queira, resete o cubo ao padrão com "BACKSPACE" (mesma tecla de apagar texto).
 * Aperte "ESC" se quiser sair do programa.
