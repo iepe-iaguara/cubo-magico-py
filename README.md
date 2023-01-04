@@ -1,4 +1,6 @@
 # cubo-magico-py
+*There is no english version yet. Sorry, I'll translate someday.*
+
 Cubo Mágico virtual escrito em python. Ainda apenas visualização 2D.
 ### Instalação e pré-requisitos
 Instale o pacote pyglet.
