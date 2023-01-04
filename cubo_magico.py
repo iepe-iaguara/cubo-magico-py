@@ -65,6 +65,9 @@ class Cubo:
         s.FR = [s.frente, s.direita, 0, 0]
         s.FL = [s.frente, s.esquerda, 0, 0]
 
+## Histórico de movimentos (Usados pelo arquivo da janela)
+        s.movimentos = [0]
+
 
 ### Movimentos
 
@@ -276,12 +279,12 @@ class Cubo:
     def M(s, i): # direção da esquerda
         if i == 0: # M
             s.cima, s.frente, s.baixo, s.tras = s.tras, s.cima, s.frente, s.baixo
-            s.UB, s.UF, s.DF, s.DB = s.UF, s.DF, s.DB, s.UB
-            s.UB[2], s.UF[2], s.DF[2], s.DB[2] = 1, 1, 1, 1
+            s.UB, s.UF, s.DF, s.DB = s.DB, s.UB, s.UF, s.DF
+            s.meios(s.UB, s.UF, s.DF, s.DB, 1, 1, 1, 1)
         elif i == 1: # M'
             s.cima, s.frente, s.baixo, s.tras = s.frente, s.baixo, s.tras, s.cima
-            s.UB, s.UF, s.DF, s.DB = s.DB, s.UB, s.UF, s.DF
-            s.UB[2], s.UF[2], s.DF[2], s.DB[2] = 1, 1, 1, 1
+            s.UB, s.UF, s.DF, s.DB = s.UF, s.DF, s.DB, s.UB
+            s.meios(s.UB, s.UF, s.DF, s.DB, 1, 1, 1, 1)
         elif i == 2: # M2
             s.cima, s.frente, s.baixo, s.tras = s.baixo, s.tras, s.cima, s.frente
             s.UB, s.UF, s.DF, s.DB = s.DF, s.DB, s.UB, s.UF
@@ -292,11 +295,11 @@ class Cubo:
         if i == 0: # E
             s.frente, s.direita, s.tras, s.esquerda = s.esquerda, s.frente, s.direita, s.tras
             s.FL, s.FR, s.BR, s.BL = s.BL, s.FL, s.FR, s.BR
-            s.FL[2], s.FR[2], s.BR[2], s.BL[2] = 1, 1, 1, 1
+            s.meios(s.FL, s.FR, s.BR, s.BL, 1, 1, 1, 1)
         elif i == 1: # E'
             s.frente, s.direita, s.tras, s.esquerda = s.direita, s.tras, s.esquerda, s.frente
             s.FL, s.FR, s.BR, s.BL = s.FR, s.BR, s.BL, s.FL
-            s.FL[2], s.FR[2], s.BR[2], s.BL[2] = 1, 1, 1, 1
+            s.meios(s.FL, s.FR, s.BR, s.BL, 1, 1, 1, 1)
         elif i == 2: # E2
             s.frente, s.direita, s.tras, s.esquerda = s.tras, s.esquerda, s.frente, s.direita
             s.FL, s.FR, s.BR, s.BL = s.BR, s.BL, s.FL, s.FR
@@ -307,11 +310,11 @@ class Cubo:
         if i == 0: # S
             s.cima, s.direita, s.baixo, s.esquerda = s.esquerda, s.cima, s.direita, s.baixo
             s.UL, s.UR, s.DR, s.DL = s.DL, s.UL, s.UR, s.DR
-            s.UL[2], s.UR[2], s.DR[2], s.DL[2] = 1, 1, 1, 1
+            s.meios(s.UL, s.UR, s.DR, s.DL, 1, 1, 1, 1)
         elif i == 1: # S'
             s.cima, s.direita, s.baixo, s.esquerda = s.direita, s.baixo, s.esquerda, s.cima
             s.UL, s.UR, s.DR, s.DL = s.UR, s.DR, s.DL, s.UL
-            s.UL[2], s.UR[2], s.DR[2], s.DL[2] = 1, 1, 1, 1
+            s.meios(s.UL, s.UR, s.DR, s.DL, 1, 1, 1, 1)
         elif i == 2: # S2
             s.cima, s.direita, s.baixo, s.esquerda = s.baixo, s.esquerda, s.cima, s.direita
             s.UL, s.UR, s.DR, s.DL = s.DR, s.DL, s.UL, s.UR
@@ -420,10 +423,7 @@ class Cubo:
         s.f4, s.e6 = s.FL[i], s.FL[(i+1)%2]
 
 
-### Rodar
-
-def main():
-    pass
+### Rode pelo outro arquivo
 
 if __name__ == "__main__":
-    main()
+    print("Rode o arquivo da janela se você quer ver o cubo mágico.")

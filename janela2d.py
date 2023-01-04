@@ -4,69 +4,18 @@ from cubo_magico import Cubo
 
 janela = pg.window.Window(930, 700, visible=False, resizable=True)
 
-cubo = Cubo()
+def criarCubo():
+    global cubo, cor1, cor2, cor3, cor4, cor5, cor6
 
-cor1 = pg.image.SolidColorImagePattern(color=cubo.cor1)
-cor2 = pg.image.SolidColorImagePattern(color=cubo.cor2)
-cor3 = pg.image.SolidColorImagePattern(color=cubo.cor3)
-cor4 = pg.image.SolidColorImagePattern(color=cubo.cor4)
-cor5 = pg.image.SolidColorImagePattern(color=cubo.cor5)
-cor6 = pg.image.SolidColorImagePattern(color=cubo.cor6)
+    cubo = Cubo()
 
-c1 = cor1.create_image(70, 70)
-c2 = cor1.create_image(70, 70)
-c3 = cor1.create_image(70, 70)
-c4 = cor1.create_image(70, 70)
-c5 = cor1.create_image(70, 70)
-c6 = cor1.create_image(70, 70)
-c7 = cor1.create_image(70, 70)
-c8 = cor1.create_image(70, 70)
-c9 = cor1.create_image(70, 70)
-b1 = cor2.create_image(70, 70)
-b2 = cor2.create_image(70, 70)
-b3 = cor2.create_image(70, 70)
-b4 = cor2.create_image(70, 70)
-b5 = cor2.create_image(70, 70)
-b6 = cor2.create_image(70, 70)
-b7 = cor2.create_image(70, 70)
-b8 = cor2.create_image(70, 70)
-b9 = cor2.create_image(70, 70)
-f1 = cor3.create_image(70, 70)
-f2 = cor3.create_image(70, 70)
-f3 = cor3.create_image(70, 70)
-f4 = cor3.create_image(70, 70)
-f5 = cor3.create_image(70, 70)
-f6 = cor3.create_image(70, 70)
-f7 = cor3.create_image(70, 70)
-f8 = cor3.create_image(70, 70)
-f9 = cor3.create_image(70, 70)
-t1 = cor4.create_image(70, 70)
-t2 = cor4.create_image(70, 70)
-t3 = cor4.create_image(70, 70)
-t4 = cor4.create_image(70, 70)
-t5 = cor4.create_image(70, 70)
-t6 = cor4.create_image(70, 70)
-t7 = cor4.create_image(70, 70)
-t8 = cor4.create_image(70, 70)
-t9 = cor4.create_image(70, 70)
-e1 = cor5.create_image(70, 70)
-e2 = cor5.create_image(70, 70)
-e3 = cor5.create_image(70, 70)
-e4 = cor5.create_image(70, 70)
-e5 = cor5.create_image(70, 70)
-e6 = cor5.create_image(70, 70)
-e7 = cor5.create_image(70, 70)
-e8 = cor5.create_image(70, 70)
-e9 = cor5.create_image(70, 70)
-d1 = cor6.create_image(70, 70)
-d2 = cor6.create_image(70, 70)
-d3 = cor6.create_image(70, 70)
-d4 = cor6.create_image(70, 70)
-d5 = cor6.create_image(70, 70)
-d6 = cor6.create_image(70, 70)
-d7 = cor6.create_image(70, 70)
-d8 = cor6.create_image(70, 70)
-d9 = cor6.create_image(70, 70)
+    cor1 = pg.image.SolidColorImagePattern(color=cubo.cor1)
+    cor2 = pg.image.SolidColorImagePattern(color=cubo.cor2)
+    cor3 = pg.image.SolidColorImagePattern(color=cubo.cor3)
+    cor4 = pg.image.SolidColorImagePattern(color=cubo.cor4)
+    cor5 = pg.image.SolidColorImagePattern(color=cubo.cor5)
+    cor6 = pg.image.SolidColorImagePattern(color=cubo.cor6)
+
 
 def renderizar():
     cubo.renderizar()
@@ -127,7 +76,6 @@ def renderizar():
 
 
 movimento = [".", "."]
-movimentos = [0]
 def mover(sentido, addmov=True):
     if movimento[0] == ".":
         print("# Insira antes um movimento válido.")
@@ -148,24 +96,24 @@ def mover(sentido, addmov=True):
     if addmov:
         mov = movimento[0]+movimento[1]+str(sentido)
         try:
-            globals()["movimentos"][(movimentos[0]+1)] = mov
-            globals()["movimentos"][0] += 1
-            for n in range(movimentos[0]+1, len(movimentos)):
-                globals()["movimentos"].pop()
+            cubo.movimentos[(cubo.movimentos[0]+1)] = mov
+            cubo.movimentos[0] += 1
+            for n in range(cubo.movimentos[0]+1, len(cubo.movimentos)):
+                cubo.movimentos.pop()
         except:
-            globals()["movimentos"].append(mov)
-            globals()["movimentos"][0] += 1
+            cubo.movimentos.append(mov)
+            cubo.movimentos[0] += 1
     globals()["movimento"] = [".", "."]
-    print(movimentos)
+    print(cubo.movimentos)
     renderizar()
 
 
 def voltar():
-    n_mov = movimentos[0]
+    n_mov = cubo.movimentos[0]
     if n_mov < 1:
         print("# Impossível voltar movimento.")
         return
-    mov = movimentos[n_mov]
+    mov = cubo.movimentos[n_mov]
     globals()["movimento"][0] = mov[0]
     globals()["movimento"][1] = mov[1]
     mov_s = int(mov[2])
@@ -174,21 +122,34 @@ def voltar():
     elif mov_s == 3 or mov_s == 4:
         mov_s -= 3
         mov_s = ((mov_s + 1) % 2) + 3
-    globals()["movimentos"][0] -= 1
+    cubo.movimentos[0] -= 1
     mover(mov_s, False)
 
 
 def avancar():
-    n_mov = movimentos[0]
+    n_mov = cubo.movimentos[0]
     try:
-        mov = movimentos[n_mov + 1]
+        mov = cubo.movimentos[n_mov + 1]
     except:
         print("# Impossível avançar.")
         return
     globals()["movimento"][0] = mov[0]
     globals()["movimento"][1] = mov[1]
-    globals()["movimentos"][0] += 1
+    cubo.movimentos[0] += 1
     mover(int(mov[2]), False)
+
+
+def resetar():
+    del globals()["cubo"]
+    criarCubo()
+    globals()["movimento"] = [".", "."]
+    renderizar()
+    print("# Cubo resetado.")
+
+
+def sair():
+    print("# Saindo. (Pressionado 'ESC')")
+    pg.app.exit()
 
 
 @janela.event
@@ -269,13 +230,16 @@ def on_key_press(symbol, modifiers):
     elif symbol == key.E: globals()["movimento"][0] = "E"
     elif symbol == key.S: globals()["movimento"][0] = "S"
     elif symbol == key.W: globals()["movimento"][0] = "w"
-    elif symbol == key.V: voltar()
-    elif symbol == key.A: avancar()
-    elif symbol == key.ESCAPE: pg.app.exit()
+    elif symbol == key.MOTION_LEFT: voltar()
+    elif symbol == key.MOTION_RIGHT: avancar()
+    elif symbol == key.ESCAPE: sair()
+    elif symbol == key.BACKSPACE: resetar()
     else: print("# Comando inválido")
 
 
 if __name__ == "__main__":
+    criarCubo()
+    renderizar()
     janela.set_caption("Cubo Mágico - 2D")
     janela.set_minimum_size(930, 700)
     janela.set_visible()
